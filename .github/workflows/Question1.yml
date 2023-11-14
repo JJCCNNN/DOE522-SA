@@ -11,21 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
       
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
     
-    - name: Install dependencies
-      run: |
-        #npm install
+      - name: Install dependencies
+        run: |
+          # npm install
       
-    - name: Build and Test
-      run: |
-        #npm run build
+      - name: Build and Test
+        run: |
+          # npm run build
           
   deploy:
     name: Deploy to Staging
@@ -33,10 +33,24 @@ jobs:
     needs: build
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
     
-    - name: Deploy to Staging
-      run: |
-        # Add your deployment steps here
-        echo "Deployment steps for staging"
+      - name: Deploy to Staging
+        run: |
+          # Add your deployment steps here
+          echo "Deployment steps for staging"
+
+  notify:
+    name: Notify Team
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Send Slack notification on failure
+        if: failure()
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data "{'text':'Build or Deployment Failed!'}" $SLACK_WEBHOOK_URL
