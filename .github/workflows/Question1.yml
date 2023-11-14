@@ -36,18 +36,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14
-    
-    - name: Change working directory
-      run: |
-        cd path/to/your/project  # Change this to the actual path
-          
     - name: Deploy to Staging
       run: |
         # Add your deployment steps here
-        echo "Deployment steps for staging"
-        npm install  # Install dependencies again, if needed
-        npm run build
+        echo "Deployment steps for staging"          
