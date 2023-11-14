@@ -14,6 +14,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
       
+    - name: Check if project directory exists
+      run: |
+        ls DOE522-SA  # Replace with your actual project directory
+        ls DOE522-SA/package.json  # Replace with your actual project directory and package file
+      continue-on-error: true
+    
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
@@ -21,12 +27,12 @@ jobs:
     
     - name: Install dependencies
       run: |
-        cd DOE522-SA  # Change this to your actual project directory
+        cd DOE522-SA  # Replace with your actual project directory
         npm install
       
     - name: Build and Test
       run: |
-        cd DOE522-SA  # Change this to your actual project directory
+        cd DOE522-SA  # Replace with your actual project directory
         npm run build
 
   deploy:
