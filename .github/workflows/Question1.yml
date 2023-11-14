@@ -21,12 +21,14 @@ jobs:
     
     - name: Install dependencies
       run: |
+        cd DOE522-SA  # Change this to your actual project directory
         npm install
       
     - name: Build and Test
       run: |
+        cd DOE522-SA  # Change this to your actual project directory
         npm run build
-          
+
   deploy:
     name: Deploy to Staging
     runs-on: ubuntu-latest
@@ -39,4 +41,4 @@ jobs:
     - name: Deploy to Staging
       run: |
         # Add your deployment steps here
-        echo "Deployment steps for staging"          
+        echo "Deployment steps for staging"
